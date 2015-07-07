@@ -1,0 +1,78 @@
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%-- 
+		요청:
+			1.클라이언트가 서버에 정보를 전달하는 행위
+			2.요청 방법에는 크게 2가지
+				-URL을 통한 정보전달
+				-화면 form을 통한 정보 전달
+			3.요청 정보를 "parameter"라고 한다.
+	
+	--%>
+	<%--
+		1.URL을 통한 요청
+			=>URL을 구성하는 예
+			=>http://news.naver.com/sports/index.nhn
+			
+			? <-이후에 나오는것은 파라미터 즉 '정보'
+			category=general
+			&ctg=news
+			&mod=read
+			&office_id=460
+			&article_id=0000000205
+	
+		2.URL을 요청을 처리할 대상 주소 정보 및 요청 정보로 나뉜다.
+		=>요청 처리 대상 주소:
+		http://news.naver.com/sports/index.nhn
+		?category=general&ctg=news&mod=read&office_id=460&article_id=0000000205
+		=>주소와 정보의 구분기호:
+		?
+		=>요청 정보:
+		category=general
+			&ctg=news
+			&mod=read
+			&office_id=460
+			&article_id=0000000205
+		
+		
+		3.요청 정보는 ? 이후로 이름=값&이름=값...형태로 
+			구성되며, 이 부분을 "parameter"라고 한다.
+		4.요청 정보의 내용은 파라미터에 명시된 이름에 따라 추출할 수 있으며,
+		파라미터의 정보는 숨겨져 있는 request 객체가 가지고 있다.
+		(형식:request.getParameter("이름");)
+		
+		5.request를 통해 추출되는 요청 정보 데이터의 형태는 모두 String 이다.
+			-만약 정수 데이터가 필요한 경우
+				 Integer.parseInt(정보);
+			-만약 정수 데이터가 필요한 경우
+				 Double.parseDouble(정보);
+	 --%>
+
+	<% 
+		String dbID="abcd";
+		String dbPW="1234";
+		//http://localhost:8080/Day02/j05_request01.jsp
+		//?
+		//id=abcd&pw=1234	
+		String rcvID =request.getParameter("id");
+		String rcvPW =request.getParameter("pw");
+		
+	%>
+
+	rcvID=<%=rcvID %><br/>
+	rcvPW=<%=rcvPW %><br/>
+
+
+
+
+
+</body>
+</html>
