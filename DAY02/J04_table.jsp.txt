@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	 
+	<table style="width:50%; height:50%" border=1px> 
+	<!--만약 테이블의 전체적인 
+	스타일 세팅을 안하면 자식 엘리먼트 스타일 적용 안댐 -->
+		<tr style="height:20%"><!--자식element는 부모 element을 기준으로 삼음-->
+			<td>첫번째칸</td>
+			<td>두번째칸</td>
+		</tr>
+		<tr style="height:70%">
+			<td>첫번째칸</td>
+			<td>두번째칸</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center" valign="middle">마지막줄</td>
+		</tr>
+	
+	</table>
+
+	
+	<%-- 
+	 	문제:
+	 	1.테이블 작성 
+	 		첫번째 줄: 이름/빈칸
+	 		두번째 줄: ID /빈칸
+	 		세번째 줄: 비밀번호/빈칸
+	 		네번째 줄: 이메일/빈칸
+			다섯번 줄: 전송 / 다시쓰기	
+	--%>
+	
+	<table border="1" style="width:60%; height:60%">
+		<tr>
+			<td>name</td><td></td>
+		</tr>
+		
+		<tr>
+			<td>ID</td><td></td>
+		</tr>
+	
+		<tr>
+			<td>password</td><td></td>
+		</tr>
+	
+		<tr>
+			<td>e-mail</td><td></td>
+		</tr>
+	
+		<tr>
+			<td>sumit</td><td>re-write</td>
+		</tr>
+	
+	</table>
+
+
+</body>
+</html>
