@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+
+	<script type="text/javascript">
+		function goPage01() {
+			location.href="/Day04/j01_function02.jsp";
+		}
+	</script>
+
+</head>
+<body>
+
+	
+	<h2>입력 페이지</h2>
+	<hr/>
+	
+	<input type="button" 
+			value="데이터 전송1-페이지만이동"
+			onclick="javascript:goPage01()"
+			/> <br/>
+
+</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>도착페이지 02</h2>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
