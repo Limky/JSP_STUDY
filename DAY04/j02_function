@@ -1,0 +1,100 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+	
+	<script type="text/javascript">
+		function goPage02() {
+			frm.action = "/Day04/j02_function02.jsp";
+			frm.submit();
+		}
+	
+	</script>
+
+
+
+
+</head>
+<body>
+
+	<h2>입력 페이지</h2>
+	<hr/>
+
+	<form name="frm" action="/Day04/j02_function03.jsp">
+		
+		페이지 이동 - page 02 
+		<input type="button" 
+			value="goPage02 함수 이용"
+			onclick="javascript:goPage02()"/>
+		<hr/>
+		
+		페이지 이동 - page 03
+		<input type="button"
+			value="form의 action 페이지로 이동"
+			onclick="javascript:submit()"/>				
+	
+	
+	
+	</form>
+
+</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>도착페이지 02</h2>
+
+
+</body>
+</html>
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>도착 페이지 03</h2>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
