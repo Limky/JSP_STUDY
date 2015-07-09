@@ -1,0 +1,47 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>전송 페이지 - post방식 - 한글전송</h2>
+	<hr/>
+	
+	<form action="/Day04/j04_form02.jsp" 
+								method="post">
+		
+		메시지 입력 : 
+		  <input type="text" name="msg"/> <br/>
+		  
+		<input type="submit" value="전송하기"/>		 	
+	
+	</form>
+
+</body>
+</html>
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>도착 페이지 - post 방식 - 한글수신</h2>
+	<hr/>
+	
+	<%
+		request.setCharacterEncoding("euc-kr");
+		
+		String msg = request.getParameter("msg");
+	%>
+	
+	msg = <%= msg %>
+
+</body>
+</html>
