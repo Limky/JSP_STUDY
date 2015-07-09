@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+
+	<script type="text/javascript">
+		function goPage02() {
+			frm.action = "/Day04/j05_form02.jsp";
+			frm.method = "post";
+			alert("전송을 시작합니다.\n"
+					+ "보내는 메시지 : " 
+					+ frm.msg.value);
+			frm.submit();
+		}
+		
+		function goPage03(rcv) {
+			alert("입력받은 메시지 : " + rcv);
+			frm.action = "/Day04/j05_form03.jsp";
+			frm.method = "post";
+			frm.hMsg.value = rcv;
+			frm.submit();
+		}
+			
+	</script>
+
+
+</head>
+<body>
+
+	<h2>데이터 입력 페이지</h2>
+	<hr/>
+	
+	<%
+		String sndMsg 
+				= "프로그래머가 보내고 싶은 메시지";
+	%>
+	
+	<form name="frm">
+		
+		메시지 입력 : 
+		<input type="text" name="msg"/> <br/>
+
+		<input type="button" 
+			value="form02로 전송하기"
+			onclick="javascript:goPage02()"/>
+		<hr/>
+		
+		
+		<input type="hidden" name="hMsg"/>
+		
+		<input type="button" 
+			value="form03로 전송하기"
+			onclick="javascript:goPage03('<%= sndMsg %>')"/>
+		<hr/>
+	
+	</form>
+</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<h2>도착 페이지 02</h2>
+	<hr/>
+	
+	<% request.setCharacterEncoding("euc-kr"); %>
+	
+	msg = <%= request.getParameter("msg") %>
+
+
+</body>
+</html>
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<h2>도착페이지 - 03</h2>
+	<hr/>
+	
+	<%
+		request.setCharacterEncoding("euc-kr");
+		String sndMsg = request.getParameter("sndMsg");
+		String hMsg = request.getParameter("hMsg");
+	%>
+	
+	sndMsg = <%= sndMsg %> <br/>
+	hMsg = <%= hMsg %> <br/>
+
+
+
+</body>
+</html>
