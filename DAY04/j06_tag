@@ -1,0 +1,153 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+
+	<script type="text/javascript">
+		function goPage02() {
+			alert(frm.email.value + "@" + frm.emailEx.value);
+
+			if(frm.emailEx.value == "") {
+				alert("정신차려라");
+// 				frm.reset();	전체 다시 쓰기
+				frm.email.value = "";
+				return;
+			}
+
+			var ee = frm.email.value + "@" + frm.emailEx.value;
+			frm.email.value = ee;
+			frm.submit();
+		}
+	
+	
+	
+	</script>
+
+
+
+
+</head>
+<body>
+
+	<h2>회원등록 화면</h2>
+	이름, 아이디, 비밀번호, 이메일, 특기, 취미, 메모
+	<hr/>
+
+	<form name="frm" action="/Day04/j06_tag02.jsp" 
+								method="post">
+		<table>
+			<tr>
+				<td>이름</td>
+				<td>
+					<input type="text" name="name"/>
+				</td>
+			</tr>
+			<tr>
+				<td>아이디</td>
+				<td>
+					<input type="text" name="id"/>
+				</td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td>
+					<input type="password" name="pw"/>
+				</td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td>
+					<input type="text" name="email"/>
+					@
+					<select name="emailEx">
+						<option value="">직접선택</option>
+						<option value="nate.com">
+							네이트</option>
+						<option value="naver.com">
+							네이버</option>
+						<option value="daum.net">
+							다음</option>
+						<option value="google.com">
+							구글</option>					
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<%-- radio 버튼 - 하나만 선택 --%>
+				<td colspan="2">
+					<input type="radio" 
+						name="char" value="사냥"
+						checked="checked"/>사냥
+					<input type="radio"
+						name="char" value="축구"/>축구
+				</td>
+			</tr>
+			<tr>
+				<%-- checkbox - 여러개 선택 --%>
+				<%-- String[] 형태 파라미터로 형성된다. --%>
+				<td colspan="2">
+					<input type="checkbox"
+						name="hobby" 
+						value="잠자기"/>잠자기
+					<input type="checkbox"
+						name="hobby"
+						value="놀기"/>놀기
+				</td>
+			</tr>
+			<tr>
+				<%-- textarea 
+					- 받는 페이지에서 
+						줄바꿈을 의미하는 \n을 <br/>로
+						변환해서 사용해야 한다. --%>
+				<td colspan="2">
+					<textarea name="contents"
+							  rows="5" cols="50">메모</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="전송"
+						onclick="javascript:goPage02()"/>
+				</td>
+			</tr>
+
+		</table>
+	
+	</form>
+	
+
+</body>
+</html>
+
+
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<% 
+		request.setCharacterEncoding("euc-kr");
+	%>
+	
+	name = <%= request.getParameter("name") %> <br/>
+	id = <%= request.getParameter("id") %> <br/>
+	pw = <%= request.getParameter("pw") %> <br/>
+	email = <%= request.getParameter("email") %> <br/>
+	emailEx = <%= request.getParameter("emailEx") %> <br/>
+	contents = <%= request.getParameter("contents") %> <br/>
+	char = <%= request.getParameter("char") %> <br/>
+	
+	hobby = <%= request.getParameter("hobby") %> <br/>
+
+	
+
+</body>
+</html>
