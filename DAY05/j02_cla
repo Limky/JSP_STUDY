@@ -1,0 +1,188 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%--컴퓨터 정보 프로그램
+		-메이커 이름,키보드 가격,본체 가격,모니터 가격
+		총 합계 (구매가격)
+		-클래스 이용
+		-총 가격 합계 산출은 클래스의 기능을 이용
+	 --%>
+
+	<form action="/Day05/j02_cla02.jsp" method="post">
+		<table border="1" cellspacing="1" cellpading="1">
+			<tr>
+				<td>메이커 이름</td>
+				<td><input type="text" name="name"/></td>
+			</tr>
+			<tr>
+				<td>키보드 가격</td>
+				<td><input type="text" name="kp"/></td>
+			</tr>
+			
+			<tr>
+				<td>모니터 가격</td>
+				<td><input type="text" name="mp"/></td>
+			</tr>
+			<tr>
+				<td>본체 가격</td>
+				<td><input type="text" name="dp"/></td>
+			</tr>
+			<tr>
+				
+				<td colspan="2" align="center"><input type="submit" value="전송하기"/></td>
+			</tr>
+			
+			
+		
+		
+		
+		</table>
+	
+	
+	</form>
+
+
+
+</body>
+</html>
+
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+	
+	<%@ page import="data.J02_computer" %>
+    
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<% 
+		request.setCharacterEncoding("EUC-KR");
+		//J02_computer com=new J02_computer();
+		
+		//방법 1.
+	/* 	String name=request.getParameter("name");
+		com.setName(name);
+		
+		String rKp=request.getParameter("kp");
+		com.setKp(rKp);
+		
+		com.setMp(request.getParameter("mp"));
+		com.setNp(request.getParameter("dp")); */
+		
+		//방법 2.
+		J02_computer com2=new J02_computer(
+				request.getParameter("name"),
+				request.getParameter("kp"),
+				request.getParameter("mp"),
+				request.getParameter("dp")
+				);
+				
+	%>
+
+	<h2>컴퓨터 전체 정보 화면</h2>
+	<hr/>
+	<table border="1">
+	
+		<tr>
+			<td>메이커 이름</td>
+			<td><%=com2.getName() %></td>
+		</tr>
+		<tr>
+			<td>키보드 가격</td>
+			<td><%=com2.getKp() %></td>
+		</tr>
+		<tr>
+			<td>모니터 가격</td>
+			<td><%=com2.getMp() %></td>
+		</tr>
+		<tr>
+			<td>본체 가격</td>
+			<td><%=com2.getNp() %></td>
+		</tr>
+		<tr>
+			<td>총 가격</td>
+			<td><%=com2.getSum() %></td>
+		</tr>
+	
+	</table>
+
+
+</body>
+</html>
+
+
+----------------클래스--------------------
+
+package data;
+
+public class J02_computer {
+	
+	String name;
+	int kp,mp,dp,sum;
+	double avg;
+	
+/*	아래 있는 것은 기본생성자인데 사용자가 임의적으로 생성자를 만들었을 경우 컴파일러가 기본적으로 생성자를 만들어
+	주지 않는다 따라서 사용자가 명시적으로 기본생성자를 만들어 줘야지 J02_computer com=new J02_computer();이와 같은 기본
+	생성자를 사용하는 코드에서 에러가 나지 않는다.*/
+	
+	//사용자가 임의적으로 생성자를 만들었기 때문에 기본생성자를 명시적으로 만들어줘야 한다.
+	public J02_computer(){
+				
+	}
+	//사용자가 임의적으로 만든 생성자
+	public J02_computer(String name,String kp,String mp,String bp){
+		
+		this.name=name;
+		this.kp=Integer.parseInt(kp);
+		this.mp=Integer.parseInt(mp);
+		this.dp=Integer.parseInt(bp);
+		getSum();
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getKp() {
+		return kp;
+	}
+	public void setKp(String kp) {
+		this.kp = Integer.parseInt(kp);
+	}
+	public int getMp() {
+		return mp;
+	}
+	public void setMp(String mp) {
+		this.mp = Integer.parseInt(mp);
+	}
+	public int getNp() {
+		return dp;
+	}
+	public void setNp(String dp) {
+		this.dp = Integer.parseInt(dp);
+	}
+
+	public int getSum(){
+		setSum();
+		return sum;
+	}
+	
+	private void setSum(){
+			this.sum=kp+mp+dp;	
+	}
+	
+}
+
