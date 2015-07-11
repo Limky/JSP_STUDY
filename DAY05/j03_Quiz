@@ -1,0 +1,193 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%--학생 정보 프로그램 
+			-이름,국어,영어,수학,
+				총점,평균,특이사항(메모)
+			
+			1.입력 항목
+			-이름,국어,영어,수학,특이사항(메모)
+			
+			2.입력화면:form-table이용 
+			  출력화면:table
+			
+			3.클래스이용
+			
+	--%>
+	
+	<form action="/Day05/j03_Quiz02.jsp">
+		<table border="1">
+			<tr>
+				<td>이름</td>
+				<td><input type="text" name="name"/></td>
+			</tr>
+			<tr>
+				<td>국어점수</td>
+				<td><input type="text" name="kr"/></td>
+			</tr>
+			<tr>
+				<td>영어점수</td>
+				<td><input type="text" name="eg"/></td>
+			</tr>
+			<tr>
+				<td>수학점수</td>
+				<td><input type="text" name="mt"/></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<textarea name="contents" rows="5" cols="32">메모</textarea>
+				</td>
+				
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" value="전송하기"/></td>
+			</tr>
+			
+		</table>
+	
+	</form>
+
+
+
+
+</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+<%@ page import="data.J03_repo" %>
+
+    
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<% 
+			request.setCharacterEncoding("euc-kr");
+			
+			J03_repo com=new J03_repo(
+					request.getParameter("name"),
+					request.getParameter("kr"),
+					request.getParameter("eg"),
+					request.getParameter("mt")
+					);
+	
+	%>
+
+	<%
+		String rcv=request.getParameter("contents");
+		String newcontent=rcv.replaceAll("\n", "<br/>");//replaceAll을 사용하는 방법 잘 익혀두기 String은 중요함.
+		
+	%>
+
+
+		<table border="1">
+			<tr>
+				<td>이름</td>
+				<td><%=com.getName() %></td>
+			</tr>
+			<tr>
+				<td>국어점수</td>
+				<td><%=com.getKr() %></td>
+			</tr>
+			<tr>
+				<td>영어점수</td>
+				<td><%=com.getEg() %></td>
+			</tr>
+			<tr>
+				<td>수학점수</td>
+				<td><%=com.getMt() %></td>
+			</tr>
+			<tr>
+				<td>총점점수</td>
+				<td><%=com.getSum() %></td>
+			</tr>
+			<tr>
+				<td>평균점수</td>
+				<td><%=com.getAvg() %></td>
+			</tr>
+			<tr>
+				<td>특이사항</td>
+				<td><%=newcontent%></td>
+			</tr>		
+
+		</table>
+	
+
+</body>
+</html>
+
+-----------------------클래스-----------------------------
+
+package data;
+
+public class J03_repo {
+
+	String name;
+	int kr,eg,mt;
+	int sum,avg;
+	public J03_repo(){
+		
+		
+	}
+	
+	public J03_repo(String name,String kr,String eg,String mt){
+		this.name=name;
+		this.kr =Integer.parseInt(kr);
+		this.eg =Integer.parseInt(eg);
+		this.mt =Integer.parseInt(mt);
+		getSum();
+		
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getKr() {
+		return kr;
+	}
+	public void setKr(String kr) {
+		this.kr =Integer.parseInt(kr);
+	}
+	public int getEg() {
+		return eg;
+	}
+	public void setEg(String eg) {
+		this.eg = Integer.parseInt(eg);
+	}
+	public int getMt() {
+		return mt;
+	}
+	public void setMt(String mt) {
+		this.mt = Integer.parseInt(mt);
+	}
+	public int getSum() {
+		setSum();
+		return sum;
+	}
+	private void setSum() {
+		this.sum=kr+eg+mt;
+	}
+	
+	public int getAvg() {
+		this.avg=sum/3;
+		return avg;
+	}
+	
+	
+	
+	
+}
