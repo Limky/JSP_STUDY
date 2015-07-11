@@ -1,0 +1,136 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+	<script type="text/javascript">
+	function goPage02(){
+		if(frm.emailEx.value==""){
+			alert("이메일을 선택하세요.");
+			frm.email.value="";//하나만 지우고싶은 경우 사용.
+			return;//return을 실행해야하는 이유 아래 것을 실행 하지 않게하기 위해서 함수를 빠져나가게 한다. return사용.
+		}
+		alert(frm.email.value+"@"+frm.emailEx.value);
+	
+		frm.email.value=frm.email.value+"@"+frm.emailEx.value;
+		
+		frm.submit();
+	}
+	
+	</script>
+
+</head>
+<body>
+
+	<h2>회원등록 화면</h2>
+	이름,아이디,비밀번호,이메일,특기,취미,메모
+	<hr />
+
+	<form name="frm" action="/Day05/j01_tag02.jsp" method="post">
+		<table>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" name="name" /></td>
+			</tr>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="id" /></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="pw" /></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td><input type="text" name="email" /> @ 
+				<select name="emailEx">
+						<option value="">직접선택</option>
+						<option value="naver.com">네이버</option>
+						<option value="daum.net">다음</option>
+						<option value="google.com">구글</option>
+						<option value="nate.com">네이트</option>
+
+				</select></td>
+			<tr>
+				<td colspan="2"><input type="radio" name="char" value="사냥"
+					checked="checked"/>사냥 <input type="radio" name="char"
+					value="축구" checked="checked"/>축구</td>
+			</tr>
+			
+			<%--checkbox-여러개 선택 --%>
+			<%--String[]형태 파라미터로 형성된다. --%>
+			<tr>
+				<td colspan="2"><input type="checkbox" name="hobby" value="잠자기" />잠자기
+					<input type="checkbox" name="hobby" value="놀기" />놀기</td>
+			
+			<%-- textarea 받는 쪽에서 줄바꿈을 의미하는 \n을 <br/>로 변환해서 사용해야 한다. --%>
+			</tr>
+				<tr>
+				<td colspan="2">
+				<textarea name="contents" rows="5" cols="50">메모</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="전송" onclick="javascript:goPage02()"/>
+				</td>
+			</tr>
+
+		</table>
+	</form>
+
+
+</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+		
+	<h2>회원 결과 화면</h2>
+	이름,아이디,비밀번호,이메일,특기,취미,메모
+	<hr />
+	<% 
+		request.setCharacterEncoding("euc-kr");
+	
+	%>
+	name=<%=request.getParameter("name")%><br/>
+	id=<%=request.getParameter("id")%><br/>
+	pw=<%=request.getParameter("pw")%><br/>
+	email=<%=request.getParameter("email")%><br/>
+	emailEx=<%=request.getParameter("emailEx")%><br/>
+	char=<%=request.getParameter("char") %><br/>
+	<%-- contents=<%=request.getParameter("contents") %><br/> --%>
+	<%-- hobby=<%=request.getParameter("hobby") %><br/> --%>
+ 	
+ 	<%--checkbox로 전달된 파라미터의 값은 String[]형태로 전달되기 때문에 
+ 	request.getparameter()를 이용할 수 없고
+ 	request.getparametervalues()를 이용해야한다. --%>
+	<%
+		String[]hbs =request.getParameterValues("hobby");
+		for(String each:hbs){//each라는 변수안에 hbs의 내용을 다 복사하는 작업.
+	%>
+	취미:<%= each %><br/>
+	<% 
+		}
+	%>
+	<%--html에서는 \n을 인식할수 없기때문에 문자열애 \n을 <br/>으로 replace하는 작업을 해줘야함 --%>
+	
+	<%
+		String rcv=request.getParameter("contents");
+		String newcontent=rcv.replaceAll("\n", "<br/>");//replaceAll을 사용하는 방법 잘 익혀두기 String은 중요함.
+		
+	%>
+	
+	메모장:<%=newcontent%><br/>
+	
+	
+</body>
+</html>
