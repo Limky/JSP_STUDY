@@ -3,20 +3,23 @@ package data;
 public class grade_get {
 
 	double grade1,grade2,grade3,grade4,grade5,grade6,grade7,grade8;
-	double avg,sum=0;
+	double sbjscore1,sbjscore2,sbjscore3,sbjscore4,sbjscore5,sbjscore6,sbjscore7,sbjscore8;
+	double avg,n=0,sum=0;
 
-	public grade_get(double grade1,double grade2,double grade3,
-			double grade4,double grade5,double grade6,double grade7,double grade8) {
-		
-		this.grade1=grade1;
-		this.grade2=grade2;
-		this.grade1=grade3;
-		this.grade2=grade4;
-		this.grade1=grade5;
-		this.grade2=grade6;
-		this.grade1=grade7;
-		this.grade2=grade8;
-		
+	public grade_get(String grade1,String grade2,String grade3,
+			String grade4,String grade5,String grade6,String grade7,String grade8,
+			String sbjscore1,String sbjscore2,String sbjscore3,
+			String sbjscore4,String sbjscore5,String sbjscore6,String sbjscore7,String sbjscore8
+			
+			) {
+		this.grade1=Double.parseDouble("grade1")*Double.parseDouble("sbjscore1");
+		this.grade2=Double.parseDouble("grade2")*Double.parseDouble("sbjscore2");
+		this.grade3=Double.parseDouble("grade3")*Double.parseDouble("sbjscore3");
+		this.grade4=Double.parseDouble("grade4")*Double.parseDouble("sbjscore4");
+		this.grade5=Double.parseDouble("grade5")*Double.parseDouble("sbjscore5");
+		this.grade6=Double.parseDouble("grade6")*Double.parseDouble("sbjscore6");
+		this.grade7=Double.parseDouble("grade7")*Double.parseDouble("sbjscore7");
+		this.grade8=Double.parseDouble("grade8")*Double.parseDouble("sbjscore8");
 		
 		if(this.grade1>100){
 			this.grade1=0;
@@ -50,7 +53,19 @@ public class grade_get {
 			
 			this.grade8=0;
 		}
-		setSum();
+	
+		
+		this.n= Integer.parseInt(sbjscore1)+
+				Integer.parseInt(sbjscore2)+
+				Integer.parseInt(sbjscore3)+
+				Integer.parseInt(sbjscore4)+
+				Integer.parseInt(sbjscore5)+
+				Integer.parseInt(sbjscore6)+
+				Integer.parseInt(sbjscore7)+
+				Integer.parseInt(sbjscore8);
+		
+		
+		setAvg();
 		
 	}
 	public double getGrade1() {
@@ -78,11 +93,11 @@ public class grade_get {
 		return grade8;
 	}
 	
-	public double getSum() {
-		return sum;
+	public double getAvg() {
+		return avg;
 	}
-	private void setSum() {
-		this.sum=grade1+grade2+grade3+grade4+grade5+grade6+grade7+grade8;
+	private void setAvg() {
+		this.avg=(grade1+grade2+grade3+grade4+grade5+grade6+grade7+grade8)/n;
 	}
 	
 	
