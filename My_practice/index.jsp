@@ -79,7 +79,7 @@ input{
 	<h2 style="margin-left:350px;">성적 입력 페이지</h2>
 
 
-<form name="frm" action="/Day01/limky02.jsp" method="post">
+<form name="frm" action="/Day01/limky02.jsp" method="get">
 	<table style="table-layout: fixed" >
 
 
@@ -107,7 +107,7 @@ input{
 					<option value="0">F</option>		
 			</select>
 			</td>
-			<td><input type="text" name="sbjscore1"/></td>
+			<td><input type="text" name="sbjscore1" value="0"/></td>
 			<td><input type="checkbox" name="major1"
 			value="3"/></td>
 		</tr>
@@ -129,7 +129,7 @@ input{
 					<option value="0">F</option>		
 			</select>
 			</td>
-			<td><input type="text" name="sbjscore2"/></td>
+			<td><input type="text" name="sbjscore2" value="0"/></td>
 				<td><input type="checkbox" name="major2"
 			value="3"/></td>
 		</tr>
@@ -148,7 +148,7 @@ input{
 					<option value="1">D</option>
 					<option value="0">F</option>		
 			</select>
-			<td><input type="text" name="sbjscore3"/></td>
+			<td><input type="text" name="sbjscore3" value="0"/></td>
 				<td><input type="checkbox" name="major3"
 			value="3"/></td>
 		
@@ -169,7 +169,7 @@ input{
 					<option value="1">D</option>
 					<option value="0">F</option>		
 			</select>
-			<td><input type="text" name="sbjscore4"/></td>
+			<td><input type="text" name="sbjscore4" value="0"/></td>
 				<td><input type="checkbox" name="major4"
 			value="3"/></td>
 		
@@ -191,7 +191,7 @@ input{
 					<option value="1">D</option>
 					<option value="0">F</option>		
 			</select>
-			<td><input type="text" name="sbjscore5"/></td>
+			<td><input type="text" name="sbjscore5" value="0"/></td>
 				<td><input type="checkbox" name="major5"
 			value="3"/></td>
 			
@@ -211,7 +211,7 @@ input{
 					<option value="1">D</option>
 					<option value="0">F</option>		
 			</select>
-			<td><input type="text" name="sbjscore6"/></td>
+			<td><input type="text" name="sbjscore6" value="0"/></td>
 				<td><input type="checkbox" name="major6"
 			value="3"/></td>
 			
@@ -232,7 +232,7 @@ input{
 					<option value="1">D</option>
 					<option value="0">F</option>		
 			</select>
-			<td><input type="text" name="sbjscore7"/></td>
+			<td><input type="text" name="sbjscore7" value="0"/></td>
 				<td><input type="checkbox" name="major7"
 			value="3"/></td>
 		
@@ -254,7 +254,7 @@ input{
 					<option value="1">D</option>
 					<option value="0">F</option>			
 			</select>
-			<td><input type="text" name="sbjscore8"/></td>
+			<td><input type="text" name="sbjscore8" value="0"/></td>
 				<td><input type="checkbox" name="major8"
 			value="3"/></td>
 		
