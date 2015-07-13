@@ -1,0 +1,130 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<form action="/Day06/J02_URL" method="post">
+	
+		데이터 입력 : <input type="text"	name="data"/> <br/>
+		
+		<input type="submit" value="전송하기"/>
+	
+	</form>
+
+
+
+
+</body>
+</html>
+
+
+package srv;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+//	서블릿 클래스 작성
+//	1. extends HttpServlet을 선언한다.
+//	2. service 메소드를 오버라이드한다.
+
+
+public class J02_goSrvl02 extends HttpServlet {
+
+	protected void service(
+			HttpServletRequest request, 
+					HttpServletResponse response) 
+							throws ServletException, IOException {
+		
+		response.setContentType("text/html; charset=euc-kr");
+		
+		request.setCharacterEncoding("euc-kr");
+		
+		String data = request.getParameter("data");
+		
+		PrintWriter out = response.getWriter();
+		
+		out.println("<html><body>");
+		out.println("데이터 : " + data + "<br/>");
+		out.println("</body></html>");
+		
+		out.flush();
+		
+		out.close();
+	}
+
+}
+
+
+
+package srv;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name="J03_Srvl01", urlPatterns={"/J03_URL"})
+public class J03_Srvl01 extends HttpServlet {
+
+	@Override
+	protected void service(
+			HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		System.out.println("J03_Srvl01 서블릿의 service 작동함");
+		
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter pw = response.getWriter();
+		
+		pw.println("<html><body>"
+			+ "<form action='/Day06/J03_URL02' method='post'>"
+			+ "데이터 입력 : <input type='text' name='data'/>"
+			+ "<input type='submit' value='전송하기'/>"
+			+ "</form></body></html>"
+		);
+
+		pw.flush();
+		pw.close();
+	}
+	
+}
+
+
+package srv;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet(name="J03_Srvl02", urlPatterns={"/J03_URL02"})
+public class J03_Srvl02 extends HttpServlet {
+
+	@Override
+	public void service(ServletRequest arg0, ServletResponse arg1)
+			throws ServletException, IOException {
+		
+		
+		
+	}
+	
+}
+
