@@ -24,34 +24,29 @@
 
 	<%
 		request.setCharacterEncoding("euc-kr");
-			grade_get com=new grade_get(
-		Double.parseDouble(request.getParameter("grade1"))*
-		Double.parseDouble(request.getParameter("sbjscore1")),
-		Double.parseDouble(request.getParameter("grade2"))*
-		Double.parseDouble(request.getParameter("sbjscore2")),
-		Double.parseDouble(request.getParameter("grade3"))*
-		Double.parseDouble(request.getParameter("sbjscore3")),
-		Double.parseDouble(request.getParameter("grade4"))*
-		Double.parseDouble(request.getParameter("sbjscore4")),
-		Double.parseDouble(request.getParameter("grade5"))*
-		Double.parseDouble(request.getParameter("sbjscore5")),
-		Double.parseDouble(request.getParameter("grade6"))*
-		Double.parseDouble(request.getParameter("sbjscore6")),
-		Double.parseDouble(request.getParameter("grade7"))*
-		Double.parseDouble(request.getParameter("sbjscore7")),
-		Double.parseDouble(request.getParameter("grade8"))*
-		Double.parseDouble(request.getParameter("sbjscore8"))
-		);
+ 		grade_get com=new grade_get(
+		request.getParameter("grade1"),
+		request.getParameter("grade2"),
+		request.getParameter("grade3"),
+		request.getParameter("grade4"),
+		request.getParameter("grade5"),
+		request.getParameter("grade6"),
+		request.getParameter("grade7"),
+		request.getParameter("grade8"),
+		
+		request.getParameter("sbjscore1"),
+		request.getParameter("sbjscore2"),
+		request.getParameter("sbjscore3"),
+		request.getParameter("sbjscore4"),
+		request.getParameter("sbjscore5"),
+		request.getParameter("sbjscore6"),
+		request.getParameter("sbjscore7"),
+		request.getParameter("sbjscore8")
+		
+		); 
 			
 			
-			int n=Integer.parseInt(request.getParameter("sbjscore1"))+
-			Integer.parseInt(request.getParameter("sbjscore2"))+
-			Integer.parseInt(request.getParameter("sbjscore3"))+
-			Integer.parseInt(request.getParameter("sbjscore4"))+
-			Integer.parseInt(request.getParameter("sbjscore5"))+
-			Integer.parseInt(request.getParameter("sbjscore6"))+
-			Integer.parseInt(request.getParameter("sbjscore7"))+
-			Integer.parseInt(request.getParameter("sbjscore8"));
+		
 	%>
 
 
@@ -73,9 +68,9 @@
 
 	<h2 style="margin-left: 350px;">성적 결과 페이지</h2>
 	<hr />
-	첫번째 취득학점<%=com.getGrade1()%><br /> 
+	첫번째 취득학점<%=com.getGrade1()%><br />
 	첫번째 해당학점<%=request.getParameter("sbjscore1")%><br />
-	총 취득 학점<%=String.format("%.3f",com.getSum())%><br />
+	총 취득 학점<%=String.format("%.3f",com.getAvg())%><br />
 
 
 
