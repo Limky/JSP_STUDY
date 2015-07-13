@@ -1,0 +1,57 @@
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+    <%@ page import="db.J04_DBData" %>
+    
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%
+		J04_DBData data = new J04_DBData();
+	
+		ArrayList<String> list = data.readAll();
+
+		for( String each : list) {
+	%>
+			<%= each %> <br/>
+	<%
+		}
+	%>
+
+
+
+</body>
+</html>
+
+package db;
+
+import java.util.ArrayList;
+
+public class J04_DBData {
+
+	ArrayList<String> list;
+	
+	public J04_DBData() {
+
+		list = new ArrayList<String>();
+		
+		list.add("길동이");
+		list.add("둘리");
+		list.add("도우너");
+		list.add("마이콜");
+		list.add("하니");
+		list.add("또치");
+	}
+	
+	public ArrayList<String> readAll() {
+		return list;
+	}
+	
+}
+
+
