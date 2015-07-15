@@ -1,0 +1,136 @@
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+
+<%@ page import="dao.J02_DBData"%>
+<%@page import="dto.J02_People"%>
+<%@page import="java.util.ArrayList"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<% 
+		J02_DBData data=new J02_DBData();
+		
+		ArrayList<J02_People> list=data.readAll();
+		for(J02_People each:list){	
+
+	%>
+	이름:<%=each.getName()%>, 나이:<%=each.getAge() %><br />
+
+	<% 
+	
+			}
+
+	%> 
+
+	<hr />
+
+	<table border="1">
+
+		<tr>
+			<td colspan="2" align="center">인사정보</td>
+		</tr>
+		<tr>
+			<td>이름</td> 
+			<td>나이</td>
+		</tr>
+	 <% 
+		for(J02_People each:list){
+	%>
+	<tr>
+		<td><%=each.getName() %></td>
+		<td><%=each.getAge() %></td>
+	</tr>
+	<% 
+		}
+	
+	%>
+
+
+
+	</table>
+	
+	
+
+</body>
+</html>
+
+
+
+package dao;
+
+import java.util.ArrayList;
+import dto.*;//dto에 있는 것을 전부 임포트 한다.
+
+public class J02_DBData {
+
+	ArrayList<J02_People> list;
+	
+	public J02_DBData() {
+		
+		//data를 자체적으로 database table마냥 만들어 본것.
+		list =new ArrayList();
+		
+		list.add(new J02_People("둘리",12));
+		list.add(new J02_People("도우너",13));
+		list.add(new J02_People("피자",14));
+		list.add(new J02_People("치킨",25));
+		list.add(new J02_People("하니",21));
+		list.add(new J02_People("희동이",45));
+		
+		
+	}
+	
+	public ArrayList<J02_People> readAll(){
+		
+		return list;
+		
+	}
+	
+	
+	
+}
+
+
+package dto;
+
+public class J02_People {
+	
+	String name;
+	int age;
+	
+	
+	public J02_People(String name, int age) {
+		this.name=name;
+		this.age=age;
+	}
+	
+	
+	
+	//멤버 정보를 변경하는 setter메소드 &&
+	//멤버 정보를 제공하는 getter메소드
+	public void setName(String name){
+		this.name=name;
+	}
+	
+	public String getName(){
+		return name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	
+	
+
+}
+
