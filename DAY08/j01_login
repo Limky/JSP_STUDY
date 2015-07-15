@@ -1,0 +1,140 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="/Day08/j01_login02.jsp" method="post">
+		
+		아이디 입력:<input type="text" name="id"/><br/>
+		비밀번호입력:<input type="text" name="pw"/><br/>
+	
+	 <input type="submit" value="로그인하기"> 
+	</form>
+
+
+</body>
+</html>
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+    <%@ page import="dao.J01_DBData" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%
+		request.setCharacterEncoding("euc-kr");
+		
+		String tid=request.getParameter("id");	
+		String tpw=request.getParameter("pw");	
+		
+		J01_DBData data = new J01_DBData();
+		int result = data.chkLog(tid,tpw);
+		
+		String msg=null;
+		if(result==1){
+			msg=tid+"님 로그인 되었습니다.";
+		}else if(result==-1){
+			
+			msg="비밀번호가 일치하지 않습니다.";
+		}else if(result==0){
+			msg="존재하지 않는 아이디입니다.";
+			
+		}
+	%>
+	<script type="text/javascript">
+		alert("<%=msg%>");
+	
+	</script>
+
+	
+</body>
+</html>
+
+
+package dao;
+
+import java.util.ArrayList;
+
+import dto.*;
+
+public class J01_DBData {
+	
+	ArrayList<J01_LogInfo> list; //제네릭걸어줌
+	
+	public J01_DBData() {
+		
+		J01_LogInfo db1=new J01_LogInfo("aaa", "111");
+		J01_LogInfo db2=new J01_LogInfo("bbb", "222");
+		J01_LogInfo db3=new J01_LogInfo("ccc", "333");
+	
+		list=new ArrayList<J01_LogInfo>();
+		
+		list.add(db1);
+		list.add(db2);
+		list.add(db3);
+		
+	}
+	
+	public int chkLog(String tid,String tpw){
+		
+		int ret=0;//ret:0-존재하지않는 아이디 
+				  //ret:1-로그인 성공
+                  //ret:-1비밀번호 불일치				
+		for(J01_LogInfo each:list){
+			
+			if(each.getId().equals(tid)){
+				//아이디가 존재한다.
+				if(each.getPw().equals(tpw)){
+					ret=1;
+					//로그인 최종성공
+				}
+				else{
+					ret=-1;
+					//비밀번호 비일치
+				}
+				break;
+			}//첫 if문이다.
+			
+		}//for문		
+		//존재하지않는 아이디
+		return ret;	
+	}
+		
+}
+
+
+
+package dto;
+
+public class J01_LogInfo {
+
+		String id,pw;
+		
+		public J01_LogInfo(String id,String pw) {
+			
+			this.id=id;
+			this.pw=pw;
+		
+		}
+		
+		public String getId(){
+			return id;
+		}
+		
+		public String getPw(){
+			return pw;
+			
+		}
+	
+}
+
+
