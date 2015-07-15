@@ -1,0 +1,221 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+     <%@ page import="dao.J02_DBData" %>
+     <%@ page import="dto.J02_Board" %>
+     <%@ page import="java.util.*" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<%
+		J02_DBData data=new J02_DBData();
+		ArrayList<J02_Board> list = data.readAll();//정보 전부 다던져주고 디자이너쪽에서 알아서 showing 하는것
+	
+	
+	%>
+	<h2>자유게시판 리스트 첫화면</h2>
+	<hr/><%--글번호/제목/공개여부 --%>
+	
+	글의 제목을 클릭하세요<br/>
+		
+	<table style="width:80%" border="1">
+		<tr>
+			<td style="width:15%" align="center">번호</td>
+			<td style="width:60%" align="center">제목</td>
+			<td align="center">공개여부</td>
+		</tr>
+	
+
+	
+	<% 
+		for(J02_Board each:list){
+	
+	%>
+		<tr>
+			<td align="center"><a onclick="javascript:location.href='/Day08/j02_board02.jsp?num=<%=each.getNum()%>'">
+			<%=each.getNum() %></a></td>
+			<td><a href="/Day08/j02_board02.jsp?num=<%=each.getNum()%>"><%=each.getTitle() %></a></td>
+			<td align="center"><%=each.getOpen()%></td>
+		</tr>
+	<%
+		}
+	%>
+		</table>
+	
+
+</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+    <%@ page import="dao.J02_DBData" %>
+    <%@ page import="dto.J02_Board" %>
+   
+    
+    
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<%
+		String rcv=request.getParameter("num");
+	
+		J02_DBData data= new J02_DBData();
+		
+		J02_Board info = data.readOne(rcv);
+	%>
+	
+	<table style="width:100%; height:80%" border="1" >
+		<tr>
+			<td style="width:15%">제목</td>
+			<td><%=info.getTitle() %></td>
+			<td style="width:15%">글쓴이</td>
+			<td style="width:20%"><%=info.getWriter() %></td>
+		</tr>
+		<tr>
+			<td>글쓴날짜</td>
+			<td><%=info.getRegDate() %></td>
+			<td>공개 여부</td>
+			<td><%=info.getOpen()%></td>
+		</tr>
+		<tr style="height:60%">
+			<td>내용</td>
+			<td colspan="3"><%=info.getContents() %></td>
+		</tr>
+		<tr>
+			<td colspan="4" align="center">
+			<input type="button" value="목록가기" onclick="javascript:location.href='/Day08/J02_board01.jsp'"/>
+			<input type="button" value="삭제하기"/>
+			<input type="button" value="수정하기"/>
+			</td>
+		
+		</tr>
+		
+	</table>
+
+
+</body>
+</html>
+
+
+
+package dao;
+
+import dto.J02_Board;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class J02_DBData {
+
+		ArrayList<J02_Board> list;
+	
+		public J02_DBData() {
+		Date regDate= new Date();
+		
+		J02_Board db1=new J02_Board(1, "첫번째", "내용1", "글쓴이", "공개", regDate);
+		J02_Board db2=new J02_Board(2, "두번째", "내용2", "글쓴이", "비공개", regDate);
+		J02_Board db3=new J02_Board(3, "세번째", "내용3", "글쓴이", "비공개", regDate);
+		J02_Board db4=new J02_Board(4, "첫번째", "내용4", "글쓴이", "공개", regDate);
+		
+		list=new ArrayList<J02_Board>();
+		
+		list.add(db1);
+		list.add(db2);
+		list.add(db3);
+		list.add(db4);		
+		
+	}
+	
+	public ArrayList<J02_Board> readAll(){
+		
+		return list;
+		
+	}
+	
+	public J02_Board readOne(String rcv){
+		int num=Integer.parseInt(rcv);
+		
+		J02_Board ret=null;//클래스의 객체를 null로 초기화 할 수 있다.
+		
+		for(J02_Board each:list){
+			
+			if(each.getNum()==num){
+				ret=each;
+				break;//찾았으니 for문 그만돌려라.
+			}
+			
+		}
+		return ret;
+		
+	}
+	
+}
+
+
+package dto;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class J02_Board {
+
+	int num;
+	String title,contents,writer,open;
+	Date regDate; //날짜 정보를 가져오는 객체임 유틸임
+	
+	public J02_Board(int num,String title,String contents,String writer,String open,Date regDate
+			) {
+		this.contents=contents;
+		this.num=num;
+		this.open=open;
+		this.regDate=regDate;
+		this.writer=writer;
+		this.title=title;
+	
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getContents() {
+		return contents;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public String getOpen() {
+		return open;
+	}
+
+	public String getRegDate() {
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd (EEEE)");
+		String ret=sdf.format(regDate);
+		
+		//날짜정보를 String으로 전달함.
+		return ret;
+	}
+	
+	
+	
+}
+
+
+
