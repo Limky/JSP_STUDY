@@ -1,0 +1,65 @@
+package dao;
+
+import java.util.ArrayList;//자바 컬렉션을 사용하려면 꼭 이것을 import 해야함
+
+
+
+public class J01_DBData {
+
+		ArrayList<String> list;//자바 컬렉션중에 하나임 기억하자.
+	
+		public J01_DBData() {
+			list=new ArrayList();
+			
+			list.add("둘리");
+			list.add("도우너");
+			list.add("마이클");
+			list.add("하니");
+			
+		}
+		
+		public ArrayList<String> readAll(){
+			
+			return list;
+			
+		}
+	
+	
+	
+}
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+	<%@page import="dao.J01_DBData" %>  
+	<%@page import="java.util.ArrayList" %>  
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%
+		J01_DBData data=new J01_DBData();
+		ArrayList<String> list = data.readAll();
+		
+		for(String a:list){
+	
+	
+	%>
+		데이터:<%=a %><br/> <!--확장 포문-->
+
+
+	<%
+	
+		}
+	%>
+
+
+
+
+
+</body>
+</html>
