@@ -1,0 +1,154 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+<%@ page import="dao.J03_DBData" %>
+<%@ page import="dto.J03_Student" %>
+<%@page import="java.util.ArrayList"%>
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<%
+	
+			J03_DBData data=new J03_DBData();
+			ArrayList<J03_Student> list=data.readAll();
+			
+				
+	%>
+		
+		<table border="1">
+
+		<tr>
+			<td colspan="6" align="center">인사정보</td>
+		</tr>
+		<tr>
+			<td>이름</td> 
+			<td>국어</td>
+			<td>영어</td>
+			<td>수학</td>
+			<td>총점</td>
+			<td>평균</td>
+		</tr>
+	 <% 
+		for(J03_Student each:list){
+	%>
+	<tr>
+		<td><%=each.getName() %></td>
+		<td><%=each.getKor()%></td>
+		<td><%=each.getEng()%></td>
+		<td><%=each.getMath()%></td>
+		<td><%=each.getSum()%></td>
+		<td><%=(int)(each.getAvg())%></td>
+		
+	</tr>
+	<% 
+		}
+	
+	%>
+
+
+
+	</table>
+	
+
+
+</body>
+</html>
+
+
+package dao;
+
+import java.util.ArrayList;
+import dto.*;
+public class J03_DBData {
+	
+	ArrayList<J03_Student> list;
+	
+	public J03_DBData() {
+		
+		//학생 성적-이름,국어,영어,수학+총점,평균
+		
+		list= new ArrayList<J03_Student>();
+		
+		list.add(new J03_Student("길동이",10,20,30));
+		list.add(new J03_Student("둘리",10,20,30));
+		list.add(new J03_Student("하니",10,20,30));
+		list.add(new J03_Student("도우너",10,20,30));
+		list.add(new J03_Student("또치",10,20,30));
+		
+		
+		
+	}
+	
+	public ArrayList<J03_Student> readAll(){
+		
+		return list;
+		
+	}
+	
+	
+
+}
+
+
+
+package dto;
+
+public class J03_Student {
+	
+	
+	String name;
+	int kor,eng,math;
+	int sum;
+	double avg;
+	
+	public J03_Student(String name,int kor,int eng,int math) {
+		
+		this.name=name;
+		this.kor=kor;
+		this.eng=eng;
+		this.math=math;	
+		
+		setSum();
+		setAvg();
+		
+	}
+
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum() {
+		this.sum = kor+eng+math;
+	}
+
+	public double getAvg() {
+		return avg;
+	}
+
+	public void setAvg() {
+		this.avg = sum/3.0;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getKor() {
+		return kor;
+	}
+
+	public int getEng() {
+		return eng;
+	}
+
+	public int getMath() {
+		return math;
+	}
+
+}
