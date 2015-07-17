@@ -1,0 +1,77 @@
+<%@page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+    <%@ page import="java.sql.*" %>
+    
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%
+		int num = 0;
+		String id = null, pw = null, name = null;
+		Date regdate = null;
+// 		=> HTML 영역에서 사용할 변수들을 
+// 			try-catch 영역 이전에서 선언한다.
+// 		=> 기본값을 설정해서 프로그램의 불확실성을 제거한다.
+	
+		try {
+			
+// 			#.1 Load 
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			System.out.println("#.1 Load Comp");
+			
+// 			#.2 Connection
+			String url 
+				= "jdbc:oracle:thin:@192.168.10.56:1521:xe";
+			String user = "para";
+			String password = "para";
+			
+			Connection conn 
+				= DriverManager.getConnection(
+										url, user, password);
+			System.out.println("#.2 Connection Comp");
+			
+// 			#.3 SQL
+			String sql 
+				= "select * from t10_loginfo order by num desc";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+// 			=> ps.executeQuery() : 
+// 				DB테이블의 레코드 읽기 처리를 실행시키는 명령
+// 			=> 제공되는 정보를 ResultSet 형태로 제공함
+
+// 			#. 정보 확인
+			while(rs.next()) {
+				System.out.println(rs.getInt("num"));
+				System.out.println(rs.getString("id"));
+				System.out.println(rs.getString("pw"));
+				System.out.println(rs.getString("name"));
+				System.out.println(rs.getDate("regdate"));
+				System.out.println();
+			}
+// 			=> 레코드가 존재한다면, 계속 레코드를 읽어들임
+
+			rs.close();
+			ps.close();
+			conn.close();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	%>
+
+	<h2>DB 데이터 출력</h2>
+	<hr/>
+	
+	<%= num %> <br/> <%= id %> <br/> <%= pw %> <br/>
+	<%= name %> <br/> <%= regdate %><br/>
+	
+	
+</body>
+</html>
