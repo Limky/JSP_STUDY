@@ -48,3 +48,32 @@
 	-->
 </body>
 </html>
+
+
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<%-- 
+		DB 테이블 만들기
+		
+		1. 브라우저 형식
+			- 스크린샷 참조
+			- 참고 : varchar2 크기
+					Enterprise - 한글 : 2byte
+					Express    - 한글 : 3byte
+	
+	
+	
+	--%>
+
+
+
+</body>
+</html>
