@@ -1,0 +1,85 @@
+j03_inPage01
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+		
+		
+	<h2 align="center">페이지01 입니다</h2>
+	
+	<%
+		String data="페이지 01에서 선언된 변수값";
+	%>
+	
+
+
+</body>
+</html>
+
+j03_inPage02
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	
+	<h2 align="center">페이지02 입니다.</h2>
+	
+
+</body>
+</html>
+
+j03_inPage03
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+		
+		<%--
+			페이지 구성 방법 2 : jsp:include page  (jsp액션태그 이용)
+				-동적 include 방식 (각각을 돌리고 그림만 따로 띄움 따라서 변수는 공유되지 않는다.)
+				-모든 파일이 실행된 출력물이 하나로 합쳐저 전체화면을 구성한다.
+				-소스코드가 합쳐지는 방식이 아니므로, 서로에게 영향을 주지 않는다.
+				-절대 경로 표현의 기준 위치는 WebContent 이다.
+
+		 --%>
+
+
+	<table style="width:100%; height:100%" border="1">
+		
+		<tr>
+		
+			<td><jsp:include page="/j03_inPage01.jsp"/></td>
+		
+		</tr>
+		<tr>
+		
+			<td><jsp:include page="/j03_inPage02.jsp"/></td>
+		
+		</tr>
+	
+	</table>
+<%-- 	<%=data %> --%>
+
+
+
+
+</body>
+</html>
+
+
+
