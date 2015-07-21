@@ -1,0 +1,85 @@
+j02_inFile01
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h2 align="center">페이지01 입니다.</h2>
+	
+	<%
+	
+		String data="페이지01의 변수값";
+	
+	%>
+
+
+</body>
+</html>
+
+
+j02_inFile02
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h2 align="center">페이지02</h2>
+
+
+</body>
+</html>
+
+
+j02_inFile03
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+  <%--   <%@ include file="/j02_inFile01.jsp" %> --%>
+    <!--보통이렇게 쓰고 시작한다 원래 본질은 데이터 변수를 같이 공유하기 위해서였음-->
+    
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!-- 페이지 구성 방법 : include file 
+	 		
+	 		-정적 include 방식
+	 		
+	 		-모든 파일의 소스가 하나로 합쳐진 상태에서 결과를 보여주는 방식으로 진행한다.(소스코드를 합친다.)
+	 		
+	 		-하나의 페이지에서 선언된 변수는 다른 페이지에도 존재하는 것으로 간주되며,이로부터 같은 이름의 변수는 
+	 		  존재할 수 없다.(01,02는 상관없지만 03은 01과02와 변수가 공유되는 개념)
+	  		
+	  		-페이지에 대한 절대 경로 표현은 WebContent 경로를 기준으로 한다.
+	  		
+	  		
+	  -->
+	
+	<table style="width:100%; height:100%" border="1">
+	
+		<tr>
+			
+			<td><%@ include file="/j02_inFile01.jsp" %></td>
+			<td><%@ include file="/j02_inFile02.jsp" %></td>
+		</tr>
+			
+	</table>
+
+	<%=data %>
+
+
+
+</body>
+</html>
+
