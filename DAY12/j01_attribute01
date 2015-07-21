@@ -1,0 +1,156 @@
+j01_attribute01
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h2><a href="/Day12/j01_attribute02.jsp">페이지 02로 이동</a></h2>
+
+
+</body>
+</html>
+
+j01_attribute02
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+    <%@ page import="dto.J01_People" %>
+    <%@ page import="java.util.*" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<% 
+		System.out.println("페이지 02 이동");
+	
+		String data="프로그래머가 보내는 데이터";
+	
+		request.setAttribute("key",data);
+		//=>프로그래머가 데이터를 다음 페이지에 전송하고 싶은 경우 request 객체에 setAttribute 메소드를 이용한다.
+		// 키->값의 구조를 가지고 있으며,키는 String,값은 object 형태가 가능하다.
+		// 전송된 데이터는 object로 도착하므로, 데이터를 받는 페이지에서는 목적에 맞는 형태로 변환해서 사용해야 한다.
+		// object형태로 전달되기 때문에 프로그래머가 원하는 형태로 다시 변형해서 사용해야 한다.
+		// Attribute 정보는 다음페이지까지만 전달된다.
+	
+		//---------------스트링 배열 넘기는 경우-------------
+		String[] data2= new String[]{"길동이","희동이","둘리"};
+		request.setAttribute("key2", data2);
+		
+		//---------------클래스 객체 넘기는 경우------------
+		J01_People pp=new J01_People("임경호",25);
+		request.setAttribute("cla",pp);
+		
+		//---------------제네릭 list 넘기는 경우------------
+		J01_People pp2=new J01_People("유재석",200);
+		J01_People pp3=new J01_People("박명수",300);
+		J01_People pp4=new J01_People("정준하",400);
+		
+		ArrayList<J01_People> list=new ArrayList<J01_People>();
+		list.add(pp);
+		list.add(pp2);
+		list.add(pp3);
+		list.add(pp4);
+		
+		request.setAttribute("list_key",list);
+		
+	%>
+	
+	<jsp:forward page="/j01_attribute03.jsp"/>
+
+
+</body>
+</html>
+
+j01_attribute03
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+    <%@ page import="dto.J01_People" %>
+    <%@ page import="java.util.*" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%
+		Object rcv = request.getAttribute("key");
+		String str = (String)rcv;
+		
+		Object rcv2 = request.getAttribute("key2");
+		String[] str2 = (String[])rcv2;
+		
+		Object rcv3=request.getAttribute("cla");
+		J01_People pp=(J01_People)rcv3;
+		
+		Object rcv4=request.getAttribute("list_key");
+		ArrayList<J01_People> list = (ArrayList<J01_People>)rcv4;
+		
+		
+	%>
+
+	전송받은 String 데이터 : <%= str %><br/><br/>
+	
+	<%
+		for(String each:str2){
+	%>
+		전송받은 String 배열의 데이터 : <%=each%><br/>
+	<%
+		}
+	%>
+	<br/>
+	전송받은 객체 데이터 : 이름-<%=pp.getName() %> 나이-<%=pp.getAge() %><br/>
+	<br/>
+	
+	<%
+	
+		for(J01_People each:list){
+	
+	%>
+		리스트 컬렉션: <%=each.getName() %> <%=each.getAge() %><br/>
+	<%
+		}
+	%>
+
+</body>
+</html>
+
+
+//--------------------dto패키지 클래스----------------------
+
+package dto;
+
+public class J01_People {
+
+	
+	String name;
+	int age;
+	
+	public J01_People(String name,int age) {
+		this.name=name;
+		this.age=age;
+		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	
+	public int getAge() {
+		return age;
+	}
+
+	
+}
