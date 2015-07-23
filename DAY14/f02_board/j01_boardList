@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>자유게시판 리스트 화면</h2>
+	<hr/>
+	
+	<a href="/Model/index.jsp?pmain=/f02_board/j02_boardWrite.jsp">글쓰기</a> 
+	
+	
+	
+	
+
+
+</body>
+</html>
+
+
+
+
+
