@@ -1,0 +1,57 @@
+package dao;
+
+//	DAO : Data Access Obejct
+//	- 데이터 처리를 담당(제어)하는 객체
+//	- DB연결 작업 및 요청 내용에 대한 처리와 응답을
+//		진행한다.
+
+import java.sql.*;
+import mUtil.DBConn;
+import dto.J02_BoardDto;
+
+public class J02_DB_Board {
+
+	public int writeOne(J02_BoardDto data) {
+
+		int res = 0;
+		
+		try {
+		
+			Connection conn = DBConn.getConnection();
+		
+//			#.3 SQL
+//			- num, title, writer, contents, viewcnt, open, regdate
+//			- board를 담당하는 시퀀스 : m_board_seq
+			
+			String sql = "insert into m_board "
+				+ "values(m_board_seq.nextval, ?, 'aa', ?, 0, ?, sysdate)";
+//			writer에 들어갈 id 명령은 추후 변경될 예정
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, data.getTitle());
+			ps.setString(2, data.getContents());
+			ps.setString(3, data.getOpen());
+			
+			res = ps.executeUpdate();
+
+			ps.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
