@@ -1,0 +1,62 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+    <%@ page import="dao.J02_DB_Board" %>
+    <%@ page import="dto.J02_BoardDto" %>
+    
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%
+		J02_DB_Board dao = new J02_DB_Board();
+	
+		J02_BoardDto dto
+			= dao.readOne(request.getParameter("num"));
+	%>
+	
+	<form style="width: 100%; height: 100%">		
+		
+		<table style="width: 100%; height: 100%" border="1">
+			<tr style="height: 15%">
+				<td style="width: 15%">제 목</td>
+				<td>
+					<%= dto.getTitle() %>
+				</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td>
+					<%= dto.getContents() %>
+				</td>
+			</tr>
+			<tr style="height: 15%">
+				<td>공개 여부</td>
+				<td>
+					<%= dto.getOpen() %>
+				</td>
+			</tr>
+			<tr style="height: 10%">
+				<td colspan="2" align="right">
+					<input type="submit" value="저장하기"/>
+					<input type="reset" value="다시쓰기"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	
+	
+	
+	
+
+</body>
+</html>
+
+
+
+
+
