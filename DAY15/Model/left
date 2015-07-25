@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+
+	<script type="text/javascript">
+		function gof02j01() {
+			frm2.pmain.value = "/f02_board/j01_boardList.jsp"; 			
+			frm2.submit();
+		}
+	</script>
+
+</head>
+<body>
+
+	<form name="frm2" action="/Model/index.jsp" method="post">
+		<input type="hidden" name="pmain"/>
+	
+		<table style="width: 100%; height: 100%">
+			<tr>
+				<td align="center">
+					<a href="/Model">HOME 화면</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<a onclick="javascript:gof02j01()">자유게시판</a>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+
+</body>
+</html>
+
+
+
+
