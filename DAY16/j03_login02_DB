@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<h2>입력받은 아이디와 비밀번호로 
+					DB에 정보가 있는지 확인하는 페이지</h2>
+					
+	<%
+// 		DB에 저장되어 있는 정보 가정 : id=aaa / pw=111
+		String dbid = "aaa";
+		String dbpw = "111";
+		
+// 		1. 이전 화면에서 클라이언트가 입력한 
+// 									id && pw 동일성 확인
+
+// 		2. 동일성 확인 후, 
+// 				동일하면 => 로그인 완료 => session 처리
+// 				동일하지 않으면 => 처리 없음
+		
+		String tid = request.getParameter("id");
+		String tpw = request.getParameter("pw");
+		
+		String msg = null;
+		
+		if(tid.equals(dbid) && tpw.equals(dbpw)) {
+			
+			session.setAttribute("logOk", dbid);
+			
+			msg = "로그인 완료되었습니다.";	
+			
+		} else {
+			msg = "로그인 실패입니다.";			
+		}
+	%>
+	
+	<script type="text/javascript">
+		alert("<%= msg %>");
+		location.href="/Day16/j03_login03_chk.jsp";
+	</script>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
