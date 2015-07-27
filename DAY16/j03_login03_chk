@@ -1,0 +1,57 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<h2>로그인 여부에 따라 보여주는 내용이 다른 화면</h2>
+	<hr/>
+	
+	
+	<%--
+		1. 로그인 성공인 경우
+			=> "내정보수정" 버튼이 있음
+			
+		2. 로그인 실패인 경우
+			=> "회원가입	" 버튼이 있음
+	 --%>
+
+
+	<%
+		String rcv = (String)session.getAttribute("logOk");
+	
+		if(rcv != null) {	// 로그인 완료 상태
+	%>
+			<input type="button" value="내정보수정"/> <br/>
+			<input type="button" value="로그아웃"
+					onclick="javascript:location.href='/Day16/j03_login04_out.jsp'"/>
+	<%
+		} else {
+	%>
+			<input type="button" value="회원가입"/>
+	<%
+		}
+	%>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
