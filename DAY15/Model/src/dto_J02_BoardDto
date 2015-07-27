@@ -1,0 +1,75 @@
+package dto;
+	
+//	DTO : Data Transfer Object
+//	- 전송되는 데이터에 대한 내용이 기술된 객체
+//	- ORM의 약속에 따라 멤버 변수의 이름을 결정하도록 권장
+//	- 일반적으로 접근 설정은 private으로 하고,
+//		setter/getter를 구현해서 사용한다.
+
+//	ORM : Object Related Mapping
+//	- DB 테이블에서 사용되는 각 항목의 이름이
+//		DTO 객체의 이름과 동일하게 사용되도록 하는 관계 설정
+
+import java.util.Date;
+
+public class J02_BoardDto {
+
+	private int num;
+	private String title;
+	private String writer;
+	private String contents;
+	private int viewcnt;
+	private String open;
+	private Date regDate;
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public String getContents() {
+		return contents;
+	}
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+	public int getViewcnt() {
+		return viewcnt;
+	}
+	public void setViewcnt(int viewcnt) {
+		this.viewcnt = viewcnt;
+	}
+	public String getOpen() {
+		return open;
+	}
+	public void setOpen(String open) {
+		this.open = open;
+	}
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+}
+
+
+
+
+
+
+
+
