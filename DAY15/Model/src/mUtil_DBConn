@@ -1,0 +1,27 @@
+package mUtil;
+
+import java.sql.*;
+
+public class DBConn {
+	
+	public static Connection getConnection() throws Exception {
+		
+		String url = "jdbc:oracle:thin:@192.168.10.56:1521:xe";
+		String user = "para";
+		String password = "para";
+		
+		Connection conn = null;
+			
+//		#.1 Load
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		System.out.println("#.1 Load Comp");
+			
+//		#.2 Connection
+		conn =  DriverManager.getConnection(
+									url, user, password);
+		System.out.println("#.2 Connection Comp");
+	
+		return conn;
+	}
+	
+}
