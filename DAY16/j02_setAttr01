@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	
+	<%
+		String data = "setAttr01 페이지의 정보";
+	
+// 		- 위의 정보를 setAttr02 페이지에 전달하는 2가지 방법
+// 		1. reqeust.setAttribute() 
+// 				=> 페이지로 전달
+// 		2. session.setAttribute(String key, Object value) 
+// 				=> 웹서버의 특정 임시 메모리 공간에 저장
+				
+		session.setAttribute("msg", data);
+	%>
+	
+	
+	
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
