@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>쿠키 확인 페이지</h2>
+	<hr/>
+	
+	<%
+		Cookie[] cks = request.getCookies();
+
+		String msg = "";
+		if(cks != null) {
+			
+			for(Cookie each : cks) {
+				msg += each.getName() + ", " 
+						+ each.getValue() + "\n";		
+			}
+		}
+	%>	
+
+	전송받은 쿠키 : <%= msg %>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
