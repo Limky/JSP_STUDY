@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%
+		Cookie ck = new Cookie("aaaa", "asdf");
+	
+		ck.setMaxAge(0);
+// 		=> 이미 클라이언트 브라우저에 존재하는
+// 			"aaaa" 이름을 가진 쿠키에 대하여
+// 			같은 이름의 쿠키를 생성한 후, 생존시간을 0초로 설정하고
+// 			전송하면, "aaaa" 이름 쿠키가 삭제되는 효과를 
+// 			얻을 수 있다.
+// 		=> 따라서, 쿠키에 입력된 값은 크게 의미있지 않다.
+	
+		response.addCookie(ck);
+	%>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
