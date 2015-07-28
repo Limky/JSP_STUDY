@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<h2>서브폴더 안의 쿠키 확인 파일</h2>
+	<hr/>
+	
+	<%
+		Cookie[] cks = request.getCookies();
+		
+		if(cks != null) {
+			for(Cookie each : cks) {
+	%>
+				쿠키 확인 : 
+					이름 = <%= each.getName() %>,
+					값 = <%= each.getValue() %> <br/>
+	<%		
+			}
+		} else {
+	%>
+			쿠키 없음				
+	<%
+		}
+	%>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
