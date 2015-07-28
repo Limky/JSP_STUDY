@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>시작페이지</h2>
+	<hr/>
+	
+	<a href="/Day17/j01_ck02.jsp">쿠키 전송화면으로 가기</a>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
