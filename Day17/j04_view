@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h2>팝업 창 화면 안에서 보여줄 내용 페이지</h2>
+	<hr/>
+	
+	<a href="/Day17/j04_make.jsp">
+		1분동안 보지 않기 - 쿠키 생성 JSP페이지로 이동함</a>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
