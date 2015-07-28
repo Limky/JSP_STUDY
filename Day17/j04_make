@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<%
+		Cookie ck = new Cookie("pop", "nopop");
+		ck.setMaxAge(60);
+		response.addCookie(ck);
+	%>
+	
+	<script type="text/javascript">
+		alert("쿠키가 전송되었습니다.");
+		self.close();	// 현재 화면 닫기 => 팝업창
+		location.href="/Day17/j01_popUp01.jsp";		
+	</script>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
