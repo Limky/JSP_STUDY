@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%
+// 		서버측에서 쿠키 생성 후 전송 전 설정되는 내용들
+
+		Cookie ck = new Cookie("aa", "30");
+		Cookie ck2 = new Cookie("bb", "20");
+		Cookie ck3 = new Cookie("cc", "10");
+
+// 		#.1 생존 시간 설정
+		ck.setMaxAge(30);	// 단위는 초
+		ck2.setMaxAge(20);	// 단위는 초
+		ck3.setMaxAge(10);
+		
+// 		#.2 전송
+		response.addCookie(ck);
+		response.addCookie(ck2);
+		response.addCookie(ck3);
+		
+	%>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
