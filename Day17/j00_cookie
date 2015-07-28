@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%--
+		쿠키(Cookie) :
+			1. 클라이언트 측 브라우저에 저장되는 임시 파일
+			
+			2. 쿠키는 클라이언트 측에서 서버에 접근할 때
+				무조건 요청 정보와 함께 전달된다.
+				
+			3. 이용되는 예 : 로그인 시 아이디 기억
+								쇼핑몰의 장바구니
+								로그인 유지
+								팝업 창 그만보기 등
+	 --%>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
