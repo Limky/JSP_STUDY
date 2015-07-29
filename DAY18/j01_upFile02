@@ -1,0 +1,125 @@
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%--
+		업로드 파일이 도착한 서버에서의 작업
+		
+		1. 클라이언트가 사용한 
+			<form enctype="multipart/form-data"> 형식에서는
+			request.getParameter()로는 정보를 받을 수 없다.
+			
+		2. 도착한 파일에 대한 정보를 제공하는 
+			라이브러리를 다운받아서 사용한다.
+			- 다운로드 주소 : www.servlets.com
+								-> com.Oreilly.Servlet
+								-> 다운로드
+								-> cos~~.zip파일
+								-> WEB-INF 폴더- lib 폴더에 저장
+								
+		3. 전송된 파일을 처리하기 위한 객체인
+			MultipartRequest를 이용하여 전달된 내용을 추출한다. 
+		
+		4. MultipartRequest 객체 생성 시 생성자에 입력할 내용은
+			다음과 같다.
+			
+			1. 첫번째 : 무조건 request
+			2. 두번째 : 전송된 파일을 저장할 경로(서버 위치)
+			3. 세번째 : 최대 처리할 파일을 크기를 바이트 단위로 지정
+						(예: 30메가 - 1024*1024*30)
+			4. 네번째 : 파일 이름에 대한 인코딩 방식 설정
+						(파일의 이름이 한글인 경우, euc-kr 설정 등 필요)
+						
+			=> 실제 웹서버인 경우,
+				2번 인자값에 실제 경로 입력
+			=> 이클립스에서 공부하는 경우,
+				지정한 위치(폴더)에 대한 내부 경로로 설정할 예정
+				
+	 --%>
+	
+	
+	<%
+// 		#. 이클립스 내부에서의 지정된 경로
+		String eRoot = "E:\\YJ_Works\\YJ_Works_JSP_201507_강남12\\MyWork\\Day18\\WebContent\\upfile";
+// 		=> 경로 표현 방법 2가지
+// 			1. 역슬래쉬 \
+// 				: \ 기호는 특수기호로 처리되기 때문에(예: \n)
+// 					경로 기호로 인식되지 못한다.
+// 				: \ 기호를 String 형태의 경로 기호를 
+// 					사용하기 위해서는 두번 입력\\을 해야 한다.
+// 			2. 슬래쉬 /
+// 				: 한번만 입력해도 경로로 인식된다.
+
+
+// 		#. 서버입장에서의 지정된 실제 경로 - application.getRealPath
+// 			=> WebContent를 기준으로 생성된 대상 경로를 입력함
+			String realPath
+				= application.getRealPath("/upfile");
+			System.out.println("realPath = " + realPath);
+// 			=> 결과 : E:\YJ_Works\YJ_Works_JSP_201507_강남12
+// 						\MyWork\.metadata\.plugins
+// 						\org.eclipse.wst.server.core
+// 						\tmp0\wtpwebapps\Day18\\upfile\
+
+			MultipartRequest mr
+				= new MultipartRequest(
+						request, eRoot, 1024*1024*30, "euc-kr");	
+
+			
+// 			업로드파일에 대한 DB 테이블
+// 			테이블 이름 : m_file
+// 			- num / title / type / orgName(파일이름)
+// 				addr(저장경로위치) / link(웹을통한접근위치)
+
+
+			String title = mr.getParameter("title");
+			String type = mr.getParameter("type");
+			
+			String orgName = mr.getOriginalFileName("upfile");
+			System.out.println("orgName = " + orgName);
+			
+			String addr = realPath + orgName;
+			String link = "/Day18/upfile/" + orgName;
+
+			
+			String msg = null;
+			
+			try {
+
+				
+				
+				
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+
+	%>	 
+	 
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
