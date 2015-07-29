@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<%--	
+		파일 업로드하기
+			1. <form> : method="post" 설정
+			2. <form> : enctype="multipart/form-data" 추가
+	 --%>
+
+	<form action="/Day18/j01_upFile02.jsp" 
+				method="post" enctype="multipart/form-data">
+	
+		파일 제목 : <input type="text" name="title"/> <br/>
+		파일 위치 : <input type="file" name="upfile"/> <br/>
+		파일 종류 : 
+			<input type="radio" name="type" 
+						value="img" checked="checked"/>그림파일
+			<input type="radio" name="type" value="doc"/>문서	
+		<br/>
+		
+		<input type="submit" value="파일업로드"/>
+	
+	</form>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
