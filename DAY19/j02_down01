@@ -1,0 +1,116 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="dto.j02_FileDto"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+	function goNext(data) {
+		frm.action="/Day18/j02_down02.jsp";
+		frm.orgName.value=data;
+		frm.method="post";
+		frm.submit();
+	}
+
+
+</script>
+
+
+
+</head>
+<body>
+
+	<%
+//		파일 다운로드
+	ArrayList<j02_FileDto> listc = new ArrayList();	
+
+	try{
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
+		String url="jdbc:oracle:thin:@192.168.10.56:1521:xe";
+		String user="para";
+		String password="para";
+		
+		Connection conn= DriverManager.getConnection(url,user,password);
+		
+		String sql="select * from m_file order by num desc";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		
+		while(rs.next()){
+			
+			j02_FileDto dto = new j02_FileDto();
+			dto.setNum(rs.getInt("num"));
+			dto.setLink(rs.getString("link"));
+			dto.setAddr(rs.getString("addr"));
+			dto.setOrgName(rs.getString("orgname"));
+			dto.setTitle(rs.getString("title"));
+			dto.setType(rs.getString("type"));
+			
+			listc.add(dto);
+		
+		}
+		
+
+			rs.close();
+			ps.close();
+			conn.close();
+		
+		
+	}catch(Exception e){
+		e.printStackTrace();
+		
+		
+	}
+
+	
+	%>
+<form name="frm">
+
+<input type="hidden" name="orgName"/>
+<table border="1"> 
+
+	<tr>
+		<td>번호</td>
+		<td>제목</td>
+		<td></td>
+	</tr>
+	
+	<%
+		if(listc != null)
+			for(j02_FileDto each:listc){
+	
+	%>
+	<tr>
+	    <td><%=each.getNum() %></td>
+		<td><%=each.getTitle()%></td>
+
+	    <td>
+	    	<a onclick="javascript:goNext('<%=each.getOrgName()%>')">다운로드</a> 
+			<a href="">삭제하기</a>
+	    </td>
+	</tr>
+	
+	<%
+			}
+	%>
+	
+
+</table>
+	
+</form>
+
+</body>
+</html>
