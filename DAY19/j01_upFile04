@@ -1,0 +1,90 @@
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.io.File"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<%--
+		파일을 삭제하기 위해서는 파일이 저장된 실제 경로(realpath)가 필요하다.
+		(DB로부터 realPath 정보를 받아와야함)
+		
+		실제 경로를 File클래스의 객체를 이용하여 삭제한다.
+		(File f = new File(실제경로 realPath));
+			f.delete();
+		)
+		
+		실제 파일 삭제 후 DB에 남겨진 기록도 삭제해야 한다.
+		(String sql="delete 테이블 조건 항목";)
+		
+		
+
+ --%>
+ <%		//# 1 . 파일의 실제 경로 확보(DB로부터 읽어와야 함)
+		// =>간략히 처리하기 위해 세션에 정보를 이용하는 예제임.
+ 		String realPath=(String)session.getAttribute("addr");
+ 
+		//# 2. 파일 클래스 객체화 한 후 실제 파일 삭제
+		File f=new File(realPath);
+		f.delete();
+		
+		
+ 		String	msg=null;
+		//# 3 . DB의 정보 삭제하기
+		try{
+			
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			System.out.println("로드 성공");
+			
+			String url="jdbc:oracle:thin:@192.168.10.56:1521:xe";
+			String user="para";
+			String password="para";
+			
+			Connection conn= DriverManager.getConnection(url,user,password);
+			System.out.println("연결 성공");
+			
+			//3.SQL :
+			// 삭제할 때에는 각 파일들을 구분하고 있는 num를 이용하여 
+			// 정보를 삭제해야 한다.
+			// =>예제에서는 파일의 addr으로 접근해서 삭제해보겠음 
+			String sql="delete m_file where addr=?";
+			PreparedStatement ps= conn.prepareStatement(sql);
+			
+			ps.setString(1, realPath);
+			int n=ps.executeUpdate();
+			
+			if(n>0){
+				
+				msg="삭제 완료";
+			}else{
+				msg="삭제 실패";
+				
+			}
+			
+			ps.close();
+			conn.close();
+			
+		}catch(Exception e){
+			
+			e.printStackTrace();
+		}
+ %>
+
+<script type="text/javascript">
+
+alert("<%=msg%>");
+
+
+</script>
+
+
+
+</body>
+</html>
