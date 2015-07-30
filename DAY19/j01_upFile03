@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<%
+		String link=(String)session.getAttribute("link");
+	
+	%>
+	
+	<img style="width:200; height:200"  src="<%=link %>"><br/>
+	
+	<a href="/Day18/j01_upFile04.jsp">삭제하기</a>
+
+
+
+
+
+</body>
+</html>
