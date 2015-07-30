@@ -1,0 +1,191 @@
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<%--
+		업로드 파일이 도착한 서버에서의 작업
+		
+		1. 클라이언트가 사용한 
+			<form enctype="multipart/form-data"> 형식에서는
+			request.getParameter()로는 정보를 받을 수 없다.
+			
+		2. 도착한 파일에 대한 정보를 제공하는 
+			라이브러리를 다운받아서 사용한다.
+			- 다운로드 주소 : www.servlets.com
+								-> com.Oreilly.Servlet
+								-> 다운로드
+								-> cos~~.zip파일
+								-> WEB-INF 폴더- lib 폴더에 저장
+								
+		3. 전송된 파일을 처리하기 위한 객체인
+			MultipartRequest를 이용하여 전달된 내용을 추출한다. 
+		
+		4. MultipartRequest 객체 생성 시 생성자에 입력할 내용은
+			다음과 같다.
+			
+			1. 첫번째 : 무조건 request
+			2. 두번째 : 전송된 파일을 저장할 경로(서버 위치)
+			3. 세번째 : 최대 처리할 파일을 크기를 바이트 단위로 지정
+						(예: 30메가 - 1024*1024*30)
+			4. 네번째 : 파일 이름에 대한 인코딩 방식 설정
+						(파일의 이름이 한글인 경우, euc-kr 설정 등 필요)
+						
+			=> 실제 웹서버인 경우,
+				2번 인자값에 실제 경로 입력
+			=> 이클립스에서 공부하는 경우,
+				지정한 위치(폴더)에 대한 내부 경로로 설정할 예정
+				
+	 --%>
+	
+	
+	<%
+		/*클라이언트에서 이미지를 로드하거나 업로드할때 링크로 서버에 접근해서 업로드,로딩을 하고
+		서버는 이를 처리하기 위해서 실제적인 주소 realpath로 DB에 연동이나,서버 자체의 파일OR메모리에 접근할때 실제경로
+		를 이용한다.*/
+	
+// 		#. 이클립스 내부에서의 지정된 경로
+		String eRoot = "E:\\lim\\MyWork\\Day18\\WebContent\\upfile";//link부분
+// 		=> 경로 표현 방법 2가지
+// 			1. 역슬래쉬 \
+// 				: \ 기호는 특수기호로 처리되기 때문에(예: \n)
+// 					경로 기호로 인식되지 못한다.
+// 				: \ 기호를 String 형태의 경로 기호를 
+// 					사용하기 위해서는 두번 입력\\을 해야 한다.
+// 			2. 슬래쉬 /
+// 				: 한번만 입력해도 경로로 인식된다.
+
+
+// 		#. 서버입장에서의 지정된 실제 경로 - application.getRealPath
+// 			=> WebContent를 기준으로 생성된 대상 경로를 입력함
+		 	String realPath
+				= application.getRealPath("/upfile");
+			System.out.println("realPath = " + realPath); //addr 부분
+// 			=> 결과 : E:\YJ_Works\YJ_Works_JSP_201507_강남12
+// 						\MyWork\.metadata\.plugins
+// 						\org.eclipse.wst.server.core
+// 						\tmp0\wtpwebapps\Day18\\upfile\
+
+			MultipartRequest mr = new MultipartRequest(request, eRoot, 1024*1024*30, "euc-kr");	
+
+			
+// 			업로드파일에 대한 DB 테이블
+// 			테이블 이름 : m_file
+// 			- num / title / type / orgName(파일이름)
+// 				addr(저장경로위치) / link(웹을통한접근위치)
+
+
+			String title = mr.getParameter("title");
+			String type = mr.getParameter("type");
+			
+			String orgName = mr.getOriginalFileName("upfile");
+			System.out.println("orgName = " + orgName);
+			
+			String addr = realPath + orgName;
+			String link = "/Day18/upfile/" + orgName;
+
+			
+			String msg = null;
+			
+			try {
+
+// 				#.1 Load
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				System.out.println("#.1 Load Comp");
+				
+// 				#.2 Connection
+				String url 
+					= "jdbc:oracle:thin:@192.168.10.56:1521:xe";
+				String user = "para";
+				String password = "para";
+				
+				Connection conn 
+					= DriverManager.getConnection(
+										url, user, password);
+				System.out.println("#.2 Connection Comp");
+				
+				
+// 				#.3 SQL
+// 				테이블 : m_file
+// 				시퀀스 : m_file_seq
+// 				테이블 항목 
+// 				- num(번호), title(파일제목), type(파일종류)
+// 					orgName(파일이름), addr(realPath-실제위치),
+// 					link(웹주소를통한파일호출)
+				String sql = "insert into m_file values(m_file_seq.nextval, ?, ?, ?, ?, ?)";
+				
+				PreparedStatement ps = conn.prepareStatement(sql);
+				
+				ps.setString(1, title);
+				ps.setString(2, type);
+				ps.setString(3, orgName);
+				ps.setString(4, addr);
+				ps.setString(5, link);
+				
+				int n=ps.executeUpdate();
+				
+				
+				if(n>0){
+					msg="저장완료";
+					
+					
+				}else{
+					msg="저장 실패";
+					
+				}
+				ps.close();
+				conn.close();
+				
+				
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+
+			session.setAttribute("link", link);
+			session.setAttribute("addr", addr);
+	%>	 
+	 
+<!--
+	초점!
+	다음 페이지에서 파일을 보여주기 위해 =>link 필요
+	이후 페이지에서 파일을 삭제하기 위해 =>addr 필요
+
+  -->
+	 
+	 <script type="text/javascript">
+	 	
+	 	alert("<%=msg%>");
+	 	location.href="/Day18/j01_upFile03.jsp";
+	 	
+	 	
+	 </script>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
