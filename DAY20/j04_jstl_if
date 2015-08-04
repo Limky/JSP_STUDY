@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<h2>if문의 이용</h2>
+<hr/>
+
+	1.단순 if문<br>
+	<c:set var="num" value="5" scope="request"></c:set>
+
+	<c:if test="${ num >= 0}">
+		출력해라<br/>
+	</c:if>
+
+
+	2.if-else if문 <br/>
+	<c:set var="cnt" value="32"/>
+
+	<c:choose>
+		<c:when test="${ cnt >= 50 }">
+			cnt는 50보다 크거나 같은수
+		</c:when>
+		<c:when test="${ cnt >= 40 }">
+			cnt는 40보다 크거나 같은수
+		</c:when>
+		<c:when test="${ cnt >= 30 }">
+			cnt는 30보다 크거나 같은수
+		</c:when>
+		<c:when test="${ cnt >= 20 }">
+			cnt는 20보다 크거나 같은수
+		</c:when>
+	</c:choose>
+
+
+</body>
+</html>
