@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+
+<%@ page import="dto.*" %>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<jsp:useBean id="pp1" class="dto.J02_People" scope="request"/>
+	<%--id:이름, class:사용하려는 클래스--%>
+	<%--반드시 클래스가 기본 생성자를 가져야만 한다.--%>
+
+	<%
+		pp1.setName("둘리");
+		pp1.setAge(1000);
+		
+		//스크립트릿 영역에서 레퍼런스의 구조로 인식됨.
+	
+	%>
+	
+	<form action="/Day20/j07_useBean.jsp" method="post">
+	
+		이름 : <input type="text" name="name"/><br/>
+		나이 : <input type="text" name="age"/><br/>	
+		
+			 <input type="submit" value="전송하기"/>
+			 
+	</form>
+	
+	
+</body>
+</html>
