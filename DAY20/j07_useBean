@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+
+	<%@ page import="dto.*" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<%
+
+		J02_People pp1 = new J02_People();
+		
+		String name=request.getParameter("name");
+		String rage =  request.getParameter("age");
+
+		
+		pp1.setName(name);
+		pp1.setAge(Integer.parseInt(rage));
+
+
+%>
+
+	<jsp:useBean id="pp2" class="dto.J02_People"/>
+	<jsp:setProperty property="name" name="pp2"/>
+	<jsp:setProperty property="age" name="pp2"/>
+	
+	<%--
+		선언한 useBean 멤버에 데이터를 저장할 때에는 setProperty를 사용.
+				-property에는 파라미터 이름,
+						name에는 선언된 useBean 변수의 이름을 지정
+						
+		파라미터 정보를 클래스 객체에 바로 저장하기 위해서는
+		1. 파라미터에서 사용하는 name과 클래스 멤버 이름이 
+		   같아야 하고,
+	
+		2.setter/getter가 반드시 존재해야 한다.
+		
+		
+	 --%>
+	
+	
+	
+	이름: ${ pp2.name }, 나이 : ${ pp2.age }<br/>
+	
+	<hr/>
+	
+	<jsp:useBean id="pp3" class="dto.J02_People"/>
+	<jsp:setProperty property="*" name="pp3"/>
+	
+	pp3 : 이름 = ${ pp3.name }, 나이 = ${ pp3.age }<br/>
+	
+	<hr/>
+	
+	pp3 => 이름 = <jsp:getProperty property="name" name="pp3"/>,
+		나이 = <jsp:getProperty property="age" name="pp3"/>
+	
+
+	
+
+
+
+
+
+
+
+</body>
+</html>
