@@ -1,0 +1,124 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+    
+    <%@ page import="dto.*"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+
+	<%
+		int n=5;
+	
+	
+	
+	
+	%>
+	<!-- EL은 자바 스크립트릿에서 선언된 변수를 호출할 수 없다. -->
+	
+	
+	expression : n=<%=n %><br/>
+	el : n= ${ n }<br/>
+	
+	<hr/>
+	
+	2.<br/>
+	
+	<!-- setAttribute를 통해 저장된 값을 키를 이용하여 호출할 수 있다.  -->
+	
+	<%
+		int m=5;
+		request.setAttribute("data",m);
+
+	%>
+	 expression : m = <%=request.getAttribute("data") %><br>
+	 el : m = ${ data }<br/>
+	
+	<hr/>	
+	
+	3.<br/>
+	
+	<%
+		J02_People pp=new J02_People();
+		pp.setName("임경호");
+		pp.setAge(25);
+		
+		request.setAttribute("data2", pp);
+	%>
+	
+	expression : 
+		이름 = <%=((J02_People)request.getAttribute("data2")).getName() %>,
+		나이 = <%=((J02_People)request.getAttribute("data2")).getAge() %>
+	<br/>
+	EL : 
+		이름 : ${ data2.name }, 나이 : ${ data2.age }<br/>
+
+
+	<hr/>
+	4.<br/>
+	
+	<!--session을 이용하는 것도 가능하다.-->
+	
+	<%
+		int p = 100;
+		session.setAttribute("data3", p);
+	
+	%>
+	
+	data 3 = ${ data3 }<br/>
+
+	<hr/>
+	
+	5. <br/>
+	
+	<%
+		request.setAttribute("k", 10);
+		session.setAttribute("k", 40000);
+	%>
+	
+	k=${ k }<br/>
+	
+	requestScope.k= ${ requestScope.k }<br/>
+	sessionScope.k= ${ sessionScope.k }<br/>
+	<hr/>
+	
+	6.로그인 상태 확인하기<br/>
+	
+	<%
+	
+		J02_People log = new J02_People();
+		log.setName("윤미래");
+		log.setAge(123);
+		
+		session.setAttribute("logon", log.getName());
+	
+	
+	%>
+	<!--로그인 상태인지 확인하는 경우  -->
+	로그인 상태 확인 : ${ logon ne null }<br/>
+	
+	<!-- 로그인 상태이면서, 그 사람의 이름이 윤미래인지 확인하는 경우  -->
+	로그인이면서,이용자 확인 : 
+	${ logon ne null and logon eq "윤미래" }<br/>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
