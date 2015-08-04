@@ -1,0 +1,40 @@
+package dto;
+
+public class J02_People {
+
+	
+	
+	String name;
+	int age;
+	//el이 네임이나 에이지 를 불러오는 함수를 사용하거나 할때 반드시 기본생성자가 있어야한다. 꼭 알고있자.
+	public J02_People(String name,int age) {
+		this.name=name;
+		this.age=age;
+	
+	}
+	
+	public J02_People() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}
